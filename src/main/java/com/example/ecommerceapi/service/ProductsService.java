@@ -1,6 +1,7 @@
 package com.example.ecommerceapi.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,13 +17,25 @@ public class ProductsService {
 	@Autowired
 	ProductsRepository repository;
 
-	public List<ProductDTO> getProducts() {
-		List<ProductEntity> entityList = Mapper.iterableToList(repository.findAll());
+	public List<ProductDTO> getProducts(String param) {
+		List<ProductEntity> entityList = Mapper.iterableToList(repository.findByCategoryAndColorOrderByOriginalPriceDesc("shirts", "black"));
 		return Mapper.mapList(entityList, ProductDTO.class);
 	}
+	
+	public ProductDTO getProductByID(String id) {
+		Optional<ProductEntity> entity = repository.findById(id);
+		if (entity.isPresent()) {
+			return Mapper.map(entity.get(), ProductDTO.class);
+		}
+		return null;
+	}
 
-	public void putProduct(ProductDTO product) {
-		ProductEntity productEntity = Mapper.map(product, ProductEntity.class);
-		repository.save(productEntity);
+	public void putProducts(List<ProductDTO> product) {
+		List<ProductEntity> productEntity = Mapper.mapList(product, ProductEntity.class);
+		repository.saveAll(productEntity);
+	}
+
+	public long countProducts(String param) {
+		return repository.count();
 	}
 }
