@@ -5,7 +5,8 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class DiscountDTO {
-	private Double discountPercentage;
-	private Long discountEndTimestamp;
+public class ColorDTO {
+	private boolean white;
+	private boolean blue;
+	private boolean black;
 }

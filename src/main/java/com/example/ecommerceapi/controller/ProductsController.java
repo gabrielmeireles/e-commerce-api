@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.lang.Nullable;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -23,10 +24,11 @@ public class ProductsController {
 	ProductsService service;
 	
 	@GetMapping("/v1/products")
-	public ResponseEntity<List<ProductDTO>> getProducts(@Nullable @RequestParam String param) {
+	public ResponseEntity<List<ProductDTO>> getProducts() {
 		try {
-			return new ResponseEntity<>(service.getProducts(param), HttpStatus.OK);
+			return new ResponseEntity<>(service.getProducts(), HttpStatus.OK);
 		} catch (Exception e) {
+			System.out.println(e);
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
@@ -35,6 +37,16 @@ public class ProductsController {
 	public ResponseEntity<ProductDTO> getProductById(@PathVariable String id) {
 		try {
 			return new ResponseEntity<>(service.getProductByID(id), HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
+	@DeleteMapping("/v1/products/{id}")
+	public ResponseEntity<String> deleteProductById(@PathVariable String id) {
+		try {
+			service.deleteById(id);
+			return new ResponseEntity<>(HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
@@ -55,7 +67,7 @@ public class ProductsController {
 			service.putProducts(products);
 			return new ResponseEntity<>(HttpStatus.OK);
 		} catch (Exception e) {
-			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 }
