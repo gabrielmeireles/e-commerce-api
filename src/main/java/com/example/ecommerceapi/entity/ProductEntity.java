@@ -7,11 +7,13 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -40,11 +42,10 @@ public class ProductEntity implements Serializable {
 	@Column(name = "FABRIC")
 	private String fabric;
 	
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @PrimaryKeyJoinColumn
     private ColorsEntity colors;
 	
-	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name = "product_id", referencedColumnName = "id")
+	@OneToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}, mappedBy = "productId")
 	private List<TagsEntity> tags;
 }

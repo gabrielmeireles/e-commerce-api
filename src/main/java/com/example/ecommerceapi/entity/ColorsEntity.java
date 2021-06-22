@@ -2,7 +2,6 @@ package com.example.ecommerceapi.entity;
 
 import java.io.Serializable;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -34,7 +33,7 @@ public class ColorsEntity implements Serializable {
 	@Column(name = "BLUE")
     private boolean blue;	
 	
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @MapsId
     private ProductEntity product;
 }
