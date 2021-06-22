@@ -40,7 +40,7 @@ public class ProductsService {
 		return Mapper.mapListEntityToListDTO(entityList);
 	}
 	
-	public ProductDTO getProductByID(String id) {
+	public ProductDTO getProductByID(Integer id) {
 		Optional<ProductEntity> entity = repository.findById(id);
 		if (entity.isPresent()) {
 			return Mapper.mapEntityToDTO(entity.get());
@@ -57,7 +57,7 @@ public class ProductsService {
 		return repository.count();
 	}
 	
-	public void deleteById(String id) {
+	public void deleteById(Integer id) {
 		repository.deleteById(id);
 	}
 	

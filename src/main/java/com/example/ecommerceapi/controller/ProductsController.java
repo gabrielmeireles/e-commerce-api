@@ -34,20 +34,22 @@ public class ProductsController {
 	}
 	
 	@GetMapping("/v1/products/{id}")
-	public ResponseEntity<ProductDTO> getProductById(@PathVariable String id) {
+	public ResponseEntity<ProductDTO> getProductById(@PathVariable Integer id) {
 		try {
 			return new ResponseEntity<>(service.getProductByID(id), HttpStatus.OK);
 		} catch (Exception e) {
+			System.out.println(e);
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 	
 	@DeleteMapping("/v1/products/{id}")
-	public ResponseEntity<String> deleteProductById(@PathVariable String id) {
+	public ResponseEntity<String> deleteProductById(@PathVariable Integer id) {
 		try {
 			service.deleteById(id);
 			return new ResponseEntity<>(HttpStatus.OK);
 		} catch (Exception e) {
+			System.out.println(e);
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
@@ -57,6 +59,7 @@ public class ProductsController {
 		try {
 			return new ResponseEntity<>(service.countProducts(param), HttpStatus.OK);
 		} catch (Exception e) {
+			System.out.println(e);
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
@@ -67,6 +70,7 @@ public class ProductsController {
 			service.putProducts(products);
 			return new ResponseEntity<>(HttpStatus.OK);
 		} catch (Exception e) {
+			System.out.println(e);
 			return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}

@@ -26,7 +26,7 @@ public class ProductEntity implements Serializable {
 	
 	@Id
 	@Column(name = "ID")
-	private int id;
+	private Integer id;
 	
 	@Column(name = "NAME")
 	private String name;

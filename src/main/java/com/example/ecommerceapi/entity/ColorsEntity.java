@@ -23,7 +23,7 @@ public class ColorsEntity implements Serializable {
 
 	@Id
     @Column(name = "PRODUCT_ID")
-    private int productId;
+    private Integer productId;
 	
 	@Column(name = "WHITE")
     private boolean white;

@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.example.ecommerceapi.entity.ProductEntity;
 
 @Repository
-public interface ProductsRepository extends JpaRepository<ProductEntity, String> {
+public interface ProductsRepository extends JpaRepository<ProductEntity, Integer> {
 	public List<ProductEntity> findByCategory(String category);
 	public List<ProductEntity> findByOrderByOriginalPriceDesc();
 	public List<ProductEntity> findByCategoryAndFabricOrderByOriginalPriceDesc(String category, String fabric);

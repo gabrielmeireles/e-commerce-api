@@ -17,7 +17,7 @@ import lombok.Setter;
 public class TagsEntity {
 	@Id
     @Column(name = "PRODUCT_ID")
-    private int productId;
+    private Integer productId;
 	
 	@Id
 	@Column(name = "TAG")
