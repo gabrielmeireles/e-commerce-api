@@ -42,10 +42,10 @@ public class ProductEntity implements Serializable {
 	@Column(name = "FABRIC")
 	private String fabric;
 	
-	@OneToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+	@OneToOne(cascade = CascadeType.ALL)
     @PrimaryKeyJoinColumn
     private ColorsEntity colors;
 	
-	@OneToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}, mappedBy = "productId")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "productId")
 	private List<TagsEntity> tags;
 }
