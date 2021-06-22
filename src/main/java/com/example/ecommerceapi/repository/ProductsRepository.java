@@ -2,8 +2,11 @@ package com.example.ecommerceapi.repository;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
@@ -29,4 +32,9 @@ public interface ProductsRepository extends JpaRepository<ProductEntity, Integer
 	
 	@Query(value = "select * from PRODUCT where abs(PRICE - ?1) < ?2", nativeQuery = true)
 	public List<ProductEntity> queryPersonalizadaNativa(Double basePrice, int priceRange);
+	
+	@Modifying
+	@Transactional
+	@Query("update ProductEntity p set p.name = ?2 where p.id = ?1")
+	public void updateProductNameById(Integer id, String newName);
 }

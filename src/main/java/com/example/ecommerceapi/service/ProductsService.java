@@ -61,6 +61,10 @@ public class ProductsService {
 		repository.deleteById(id);
 	}
 	
+	public void updateProductNameById(Integer id) {
+		repository.updateProductNameById(id, "Novo Nome do Produto");
+	}
+	
 	private Example<ProductEntity> getProductExample() {
 		ProductEntity entity = new ProductEntity();
 		entity.setCategory("shirts");
