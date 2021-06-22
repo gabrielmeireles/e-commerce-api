@@ -61,6 +61,10 @@ public class ProductsService {
 		repository.deleteById(id);
 	}
 	
+	public void deleteByCategory() {
+		repository.deleteByCategory("shirts");
+	}
+	
 	public void updateProductNameById(Integer id) {
 		repository.updateProductNameById(id, "Novo Nome do Produto");
 	}

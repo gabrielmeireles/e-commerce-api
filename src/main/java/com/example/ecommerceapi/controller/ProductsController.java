@@ -55,6 +55,17 @@ public class ProductsController {
 		}
 	}
 	
+	@DeleteMapping("/v1/products/category")
+	public ResponseEntity<String> deleteProductByCategory() {
+		try {
+			service.deleteByCategory();
+			return new ResponseEntity<>(HttpStatus.OK);
+		} catch (Exception e) {
+			System.out.println(e);
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
 	@PatchMapping("/v1/products/{id}/name")
 	public ResponseEntity<String> updateProductNameById(@PathVariable Integer id) {
 		try {
