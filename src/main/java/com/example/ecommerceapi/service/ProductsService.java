@@ -1,5 +1,6 @@
 package com.example.ecommerceapi.service;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,8 +23,8 @@ public class ProductsService {
 	ProductsRepository repository;
 
 	public List<ProductDTO> getProducts() {
-		List<ProductEntity> entityList = Mapper.iterableToList(repository.findAll());
-//		List<ProductEntity> entityList = Mapper.iterableToList(repository.findAllById(Arrays.asList("11", "12")));
+//		List<ProductEntity> entityList = Mapper.iterableToList(repository.findAll());
+//		List<ProductEntity> entityList = Mapper.iterableToList(repository.findAllById(Arrays.asList(11, 12)));
 //		List<ProductEntity> entityList = Mapper.iterableToList(repository.findByCategory("shirts"));
 //		List<ProductEntity> entityList = Mapper.iterableToList(repository.findByNameContaining("polo"));
 //		List<ProductEntity> entityList = Mapper.iterableToList(repository.findByOriginalPriceBetween(25d, 50d));
@@ -31,11 +32,12 @@ public class ProductsService {
 //		List<ProductEntity> entityList = Mapper.iterableToList(repository.findByOrderByOriginalPriceDesc());
 //		List<ProductEntity> entityList = Mapper.iterableToList(repository.findByColors_WhiteTrue());
 //		List<ProductEntity> entityList = Mapper.iterableToList(repository.findByTags_Tag("Adolescente"));
+		
 //		List<ProductEntity> entityList = Mapper.iterableToList(repository.queryPersonalizada("gola v", "shirts", "leather", "Praia"));
 //		List<ProductEntity> entityList = Mapper.iterableToList(repository.queryPersonalizadaNativa(50d, 10));
 //		List<ProductEntity> entityList = Mapper.iterableToList(repository.findAll(getProductExample()));
 //		List<ProductEntity> entityList = Mapper.iterableToList(repository.findAll(getPageable()));
-//		List<ProductEntity> entityList = Mapper.iterableToList(repository.findByOriginalPriceBetween(25d, 50d, getPageable()));
+		List<ProductEntity> entityList = Mapper.iterableToList(repository.findByOriginalPriceBetween(25d, 50d, getPageable()));
 		
 		return Mapper.mapListEntityToListDTO(entityList);
 	}
@@ -79,7 +81,7 @@ public class ProductsService {
 	}
 	
 	private Pageable getPageable() {
-//		return PageRequest.of(0, 2);
-		return PageRequest.of(0, 2, Sort.by("originalPrice").descending());
+		return PageRequest.of(0, 2);
+//		return PageRequest.of(1, 2, Sort.by("originalPrice").descending());
 	}
 }

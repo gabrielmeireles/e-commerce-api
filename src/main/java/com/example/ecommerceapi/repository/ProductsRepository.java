@@ -15,10 +15,10 @@ import com.example.ecommerceapi.entity.ProductEntity;
 @Repository
 public interface ProductsRepository extends JpaRepository<ProductEntity, Integer> {
 	public List<ProductEntity> findByCategory(String category);
-	public List<ProductEntity> findByOrderByOriginalPriceDesc();
-	public List<ProductEntity> findByCategoryAndFabricOrderByOriginalPriceDesc(String category, String fabric);
 	public List<ProductEntity> findByNameContaining(String name);
 	public List<ProductEntity> findByOriginalPriceBetween(Double minPrice, Double maxPrice);
+	public List<ProductEntity> findByOrderByOriginalPriceDesc();
+	public List<ProductEntity> findByCategoryAndFabricOrderByOriginalPriceDesc(String category, String fabric);
 	public List<ProductEntity> findByOriginalPriceBetween(Double minPrice, Double maxPrice, Pageable pageable);
 	public List<ProductEntity> findByColors_WhiteTrue();
 	public List<ProductEntity> findByTags_Tag(String tag);
